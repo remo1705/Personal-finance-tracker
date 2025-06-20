@@ -15,6 +15,13 @@
       "when": 1748443249964,
       "tag": "0001_tranquil_rattler",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1750413889333,
+      "tag": "0002_awesome_raider",
+      "breakpoints": true
     }
   ]
 }
