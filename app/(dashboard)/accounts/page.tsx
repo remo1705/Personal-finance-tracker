@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card"; 
 import { useNewAccount } from "@/features/accounts/hooks/use-new-account";
 import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
-import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete";
+import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete-accounts";
 
 import { columns } from "./columns";
 import { Skeleton } from "@/components/ui/skeleton";
