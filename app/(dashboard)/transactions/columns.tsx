@@ -8,6 +8,7 @@ import { InferResponseType } from "hono"
 import { client } from "@/lib/hono"
 import { Actions } from "./actions"
 import { format } from "date-fns"
+import { formatCurrency } from "@/lib/utils"
 
 export type ResponseType = InferResponseType<typeof client.api.transactions.$get, 200>["data"][0]
 
@@ -108,7 +109,7 @@ export const columns: ColumnDef<ResponseType>[] = [
       const amount = parseFloat(row.getValue("amount")); 
       return (
         <span>
-          {formatCurrency}
+          {formatCurrency(amount)}
         </span>
       )
     }
