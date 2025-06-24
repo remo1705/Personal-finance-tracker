@@ -6,7 +6,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input"; 
 import { Select } from "@/components/select";
 import { DatePicker } from "@/components/date-picker";
-import { Button } from "@/components/ui/button"; 
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea"; 
+import { AmountInput } from "@/components/amount-input";
 import {
     Form, 
     FormControl, 
@@ -17,6 +19,7 @@ import {
 } from "@/components/ui/form"; 
 import { insertTransactionSchema } from "@/db/schema";
 import { handle } from "hono/vercel";
+
 
 const formSchema = z.object({
     date: z.coerce.date(),
@@ -148,6 +151,45 @@ export const TransactionForm = ({
                                     disabled={disabled}
                                     placeholder="Add a payee"
                                     {...field} 
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+
+                <FormField 
+                    name="amount"
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>
+                                Amount    
+                            </FormLabel>
+                            <FormControl>
+                                <AmountInput 
+                                    {...field}
+                                    disabled={disabled}
+                                    placeholder="0.00"  
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+
+                <FormField 
+                    name="notes"
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>
+                                Notes    
+                            </FormLabel>
+                            <FormControl>
+                                <Textarea 
+                                    {...field} 
+                                    value={field.value ?? ""}
+                                    disabled={disabled}
+                                    placeholder="Optional notes"
                                 />
                             </FormControl>
                         </FormItem>
