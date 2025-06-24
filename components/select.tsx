@@ -1,13 +1,11 @@
 "use client"; 
-
-import { placeholder } from "drizzle-orm";
 import { useMemo } from "react";
 import { SingleValue} from "react-select"; 
 import CreateableSelect from "react-select/creatable"; 
 
 type Props = { 
     onChange: (value?: string) => void; 
-    onCreate: (value?: string) => void; 
+    onCreate?: (value: string) => void; 
     options?: {label: string; value: string; }[];
     value?: string | null | undefined; 
     disabled? : boolean;
@@ -43,7 +41,7 @@ export const Select = ({
                     borderColor: "#e2e8f0",
                     ":hover": {
                         borderColor: "#e2e8f0",
-                    }
+                    }, 
                 })
             }}
             value={formattedValue}

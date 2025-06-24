@@ -15,6 +15,7 @@ import {
     FormMessage, 
 } from "@/components/ui/form"; 
 import { handle } from "hono/vercel";
+import { Select } from "@/components/select";
 
 const formSchema = z.object({
     date: z.coerce.date(),
@@ -61,7 +62,8 @@ export const TransactionForm = ({
     });
 
     const handleSubmit = (values: FormValues) => {
-        onSubmit(values); 
+        console.log({ values }); 
+        //onSubmit(values); 
     };
 
     const handleDelete = () => {
@@ -73,18 +75,43 @@ export const TransactionForm = ({
             <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4 pt-4"
             >
                 <FormField 
-                    name="name"
+                    name="accountId"
                     control={form.control}
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>
-                                Name
+                                Account 
                             </FormLabel>
                             <FormControl>
-                                <Input 
+                                <Select 
+                                    placeholder="Select an account"
+                                    options={accountOptions}
+                                    onCreate={onCreateAccount}
+                                    value={field.value}
+                                    onChange={field.onChange}
                                     disabled={disabled}
-                                    placeholder="e.g. Cash, Bank, Credit Card"
-                                    {...field}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+
+                <FormField 
+                    name="categoryId"
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>
+                                Category  
+                            </FormLabel>
+                            <FormControl>
+                                <Select 
+                                    placeholder="Select a category"
+                                    options={categoryOptions}
+                                    onCreate={onCreateCategory}
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    disabled={disabled}
                                 />
                             </FormControl>
                         </FormItem>
