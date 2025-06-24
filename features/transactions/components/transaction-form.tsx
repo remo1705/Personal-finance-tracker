@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/form"; 
 import { insertTransactionSchema } from "@/db/schema";
 import { handle } from "hono/vercel";
+import { convertAmountToMiliunits } from "@/lib/utils";
 
 
 const formSchema = z.object({
@@ -66,8 +67,13 @@ export const TransactionForm = ({
     });
 
     const handleSubmit = (values: FormValues) => {
-        console.log({ values }); 
-        //onSubmit(values); 
+        const amount = parseFloat(values.amount); 
+        const amountInMiliunits = convertAmountToMiliunits(amount); 
+
+        onSubmit({
+            ...values, 
+            amount: amountInMiliunits, 
+        }); 
     };
 
     const handleDelete = () => {
@@ -197,7 +203,7 @@ export const TransactionForm = ({
                 />
 
                 <Button className="w-full" disabled={disabled}>
-                    {id ? "Save changes" : "Create account"}
+                    {id ? "Save changes" : "Create transaction"}
                 </Button>
                 {!!id && (
                         <Button 
@@ -208,7 +214,7 @@ export const TransactionForm = ({
                         variant="outline"
                     >
                         <Trash className="size-4 mr-2"/>
-                        Delete account
+                        Delete transaction
                     </Button>
                 )}
             </form>
