@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input"; 
 import { Button } from "@/components/ui/button"; 
-import { insertAccountSchema } from "@/db/schema";
+import { insertTransactionSchema } from "@/db/schema";
 import {
     Form, 
     FormControl, 
@@ -16,11 +16,21 @@ import {
 } from "@/components/ui/form"; 
 import { handle } from "hono/vercel";
 
-const formSchema = insertAccountSchema.pick({
-    name: true, 
+const formSchema = z.object({
+    date: z.coerce.date(),
+    accountId: z.string(), 
+    categoryId: z.string().nullable().optional(), 
+    payee: z.string(), 
+    amount: z.string(), 
+    notes: z.string().nullable().optional(), 
+});
+
+const apiSchema = insertTransactionSchema.omit({
+    id: true, 
 }); 
 
 type FormValues = z.input<typeof formSchema>;
+type ApiFormValues = z.input<typeof apiSchema>; 
 
 type Props = {
     id?:string;
@@ -30,7 +40,7 @@ type Props = {
     disabled?: boolean; 
 }
 
-export const AccountForm = ({
+export const TransactionForm = ({
     id,
     defaultValues,
     onSubmit,
