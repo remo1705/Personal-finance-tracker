@@ -17,6 +17,7 @@ import { useBulkDeleteTransactions } from "@/features/transactions/api/use-bulk-
 
 import { columns } from "./columns";
 import { Skeleton } from "@/components/ui/skeleton";
+import { UploadButton } from "./upload-button";
 
 enum VARIANTS {
     LIST = "LIST", 
@@ -75,13 +76,15 @@ const TransactionsPage = () => {
                     <CardTitle className="text-xl line-clamp-1">
                         Transactions History
                     </CardTitle>
-                    <Button onClick={newTransaction.onOpen} size="sm">
-                        <Plus className="size-4 mr-2"/>
-                        Add new
-                    </Button>
-                    <UploadButton 
-                        onUpload = {() => {}}
-                    />
+                    <div className="flex items-center gap-x-2">
+                        <Button onClick={newTransaction.onOpen} size="sm">
+                            <Plus className="size-4 mr-2"/>
+                            Add new
+                        </Button>
+                        <UploadButton
+                            onUpload = {() => {}}
+                        />
+                    </div>
                 </CardHeader>
                 <CardContent>
                     <DataTable 
