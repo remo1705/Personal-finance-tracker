@@ -1,5 +1,3 @@
-// working on setting up the headers for the CSV file
-
 import {
     Select, 
     SelectContent, 
