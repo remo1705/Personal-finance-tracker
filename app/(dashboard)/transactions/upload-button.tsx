@@ -2,7 +2,6 @@ import { Upload } from "lucide-react";
 import { useCSVReader} from "react-papaparse"; 
 
 import { Button } from "@/components/ui/button";
-import { on } from "events";
 
 type Props = {
     onUpload: (results: any) => void; 
