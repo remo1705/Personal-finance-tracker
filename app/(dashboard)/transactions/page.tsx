@@ -1,6 +1,7 @@
 "use client"; 
 
 import { Loader2, Plus } from "lucide-react"; 
+import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/data-table";
@@ -17,7 +18,20 @@ import { useBulkDeleteTransactions } from "@/features/transactions/api/use-bulk-
 import { columns } from "./columns";
 import { Skeleton } from "@/components/ui/skeleton";
 
+enum VARIANTS {
+    LIST = "LIST", 
+    IMPORT = "IMPORT"
+}; 
+
+const INITIAL_IMPORT_RESULTS = {
+    date: [], 
+    errors: [], 
+    meta: {}, 
+}; 
+
 const TransactionsPage = () => {
+    const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST); 
+
     const newTransaction = useNewTransaction(); 
     const deleteTransactions = useBulkDeleteTransactions(); 
     const transactionsQuery = useGetTransactions(); 
@@ -44,6 +58,16 @@ const TransactionsPage = () => {
         );
     };
     
+    if (variant === VARIANTS.IMPORT) {
+        return (
+            <>
+                <div>
+                    This is a screen for import 
+                </div>
+            </>
+        )
+    }
+
     return (
         <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
             <Card className="border-none drop-shadow-sm">
@@ -55,6 +79,9 @@ const TransactionsPage = () => {
                         <Plus className="size-4 mr-2"/>
                         Add new
                     </Button>
+                    <UploadButton 
+                        onUpload = {() => {}}
+                    />
                 </CardHeader>
                 <CardContent>
                     <DataTable 
