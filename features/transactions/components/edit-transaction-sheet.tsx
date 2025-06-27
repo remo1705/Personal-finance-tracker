@@ -14,6 +14,12 @@ import { useEditTransaction } from "@/features/transactions/api/use-edit-transac
 import { useDeleteTransaction } from "@/features/transactions/api/use-delete-transaction";
 import { TransactionForm } from "@/features/transactions/components/transaction-form";
 
+import { useGetCategories } from "@/features/categories/api/use-get-categories";
+import { useCreateCategory } from "@/features/categories/api/use-create-category";
+
+import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
+import { useCreateAccount } from "@/features/accounts/api/use-create-account";
+
 import { useConfirm } from "@/hooks/use-confirm";
 import { Loader2 } from "lucide-react";
 
@@ -35,11 +41,37 @@ export const EditTransactionSheet = () => {
     const editMutation = useEditTransaction(id); 
     const deleteMutation = useDeleteTransaction(id); 
 
+    const categoryQuery = useGetCategories(); 
+    const categoryMutation = useCreateCategory(); 
+    const onCreateCategory = (name: string) => categoryMutation.mutate({
+        name
+    }); 
+    const categoryOptions = (categoryQuery.data ?? []).map((category) => ({
+        label: category.name, 
+        value: category.id, 
+    })); 
+
+    const accountQuery = useGetAccounts(); 
+    const accountMutation = useCreateAccount(); 
+    const onCreateAccount = (name: string) => accountMutation.mutate({
+        name
+    }); 
+    const accountOptions = (accountQuery.data ?? []).map((account) => ({
+        label: account.name, 
+        value: account.id, 
+    }));
+
     const isPending = 
         editMutation.isPending || 
-        deleteMutation.isPending; 
+        deleteMutation.isPending ||
+        transactionQuery.isLoading || 
+        categoryMutation.isPending ||
+        accountMutation.isPending; 
 
-    const isLoading = transactionQuery.isLoading; 
+    const isLoading = 
+    transactionQuery.isLoading || 
+    categoryQuery.isLoading || 
+    accountQuery.isLoading; 
 
     const onSubmit = (values: FormValues) => {
         editMutation.mutate(values, {
@@ -99,12 +131,12 @@ export const EditTransactionSheet = () => {
                             </div>
                         ) : (
                             <TransactionForm
-                                key={id}
-                                id={id}
-                                onSubmit={onSubmit} 
-                                disabled={isPending} 
-                                defaultValues={defaultValues}
-                                onDelete={onDelete}
+                                onSubmit={onSubmit}
+                                disabled={isPending}
+                                categoryOptions={categoryOptions}
+                                accountOptions={accountOptions}
+                                onCreateAccount={onCreateAccount}
+                                onCreateCategory={onCreateCategory}
                             />
                         )
                     }
