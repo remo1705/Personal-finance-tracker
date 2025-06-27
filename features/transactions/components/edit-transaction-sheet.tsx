@@ -98,7 +98,7 @@ export const EditTransactionSheet = () => {
         categoryId: transactionQuery.data.categoryId,
         amount: transactionQuery.data.amount.toString(),
         date: transactionQuery.data.date 
-            ? new Date(transactionQuery.data.accountId) 
+            ? new Date(transactionQuery.data.date) 
             : new Date(),
         payee: transactionQuery.data.payee,
         notes: transactionQuery.data.notes,
