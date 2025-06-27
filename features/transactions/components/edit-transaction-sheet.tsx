@@ -106,7 +106,7 @@ export const EditTransactionSheet = () => {
         accountId: "", 
         categoryId: "", 
         amount: "", 
-        date: "", 
+        date: new Date(), 
         payee: "", 
         notes: "", 
     }; 
@@ -131,7 +131,10 @@ export const EditTransactionSheet = () => {
                             </div>
                         ) : (
                             <TransactionForm
+                                id={id}
+                                defaultValues={defaultValues}
                                 onSubmit={onSubmit}
+                                onDelete={onDelete}
                                 disabled={isPending}
                                 categoryOptions={categoryOptions}
                                 accountOptions={accountOptions}
