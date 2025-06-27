@@ -33,6 +33,10 @@ const INITIAL_IMPORT_RESULTS = {
 const TransactionsPage = () => {
     const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST); 
 
+    const onUpload = (results: typeof INITIAL_IMPORT_RESULTS) => {
+        setVariant(VARIANTS.IMPORT); 
+    }; 
+
     const newTransaction = useNewTransaction(); 
     const deleteTransactions = useBulkDeleteTransactions(); 
     const transactionsQuery = useGetTransactions(); 
@@ -82,7 +86,7 @@ const TransactionsPage = () => {
                             Add new
                         </Button>
                         <UploadButton
-                            onUpload = {() => {}}
+                            onUpload = {onUpload}
                         />
                     </div>
                 </CardHeader>
