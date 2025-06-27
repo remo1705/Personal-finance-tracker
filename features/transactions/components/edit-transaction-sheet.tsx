@@ -1,4 +1,3 @@
-import { AccountForm } from "@/features/accounts/components/account-form";
 import {
     Sheet, 
     SheetContent, 
@@ -6,39 +5,41 @@ import {
     SheetHeader, 
     SheetTitle, 
 } from "@/components/ui/sheet"; 
-import { insertAccountSchema } from "@/db/schema";
+import { insertTransactionSchema } from "@/db/schema";
 import { z } from "zod"; 
-import { useOpenAccount } from "@/features/accounts/hooks/use-open-account";
-import { useGetAccount } from "@/features/accounts/api/use-get-account";
-import { useEditAccount } from "@/features/accounts/api/use-edit-account";
-import { useDeleteAccount } from "@/features/accounts/api/use-delete-account";
+
+import { useOpenTransaction } from "@/features/transactions/hooks/use-open-transaction";
+import { useGetTransaction } from "@/features/transactions/api/use-get-transaction";
+import { useEditTransaction } from "@/features/transactions/api/use-edit-transaction";
+import { useDeleteTransaction } from "@/features/transactions/api/use-delete-transaction";
+import { TransactionForm } from "@/features/transactions/components/transaction-form";
 
 import { useConfirm } from "@/hooks/use-confirm";
 import { Loader2 } from "lucide-react";
 
-const formSchema = insertAccountSchema.pick({
-    name: true, 
+const formSchema = insertTransactionSchema.omit({
+    id: true, 
 }); 
 
 type FormValues = z.input<typeof formSchema>;
 
-export const EditAccountSheet = () => {
-    const { isOpen, onClose, id } = useOpenAccount(); 
+export const EditTransactionSheet = () => {
+    const { isOpen, onClose, id } = useOpenTransaction(); 
 
     const [ConfirmDialog, confirm] = useConfirm(
         "Are you sure?", 
-        "You are about to delete this account"
+        "You are about to delete this transaction."
     ); 
 
-    const accountQuery = useGetAccount(id); 
-    const editMutation = useEditAccount(id); 
-    const deleteMutation = useDeleteAccount(id); 
+    const transactionQuery = useGetTransaction(id); 
+    const editMutation = useEditTransaction(id); 
+    const deleteMutation = useDeleteTransaction(id); 
 
     const isPending = 
         editMutation.isPending || 
         deleteMutation.isPending; 
 
-    const isLoading = accountQuery.isLoading; 
+    const isLoading = transactionQuery.isLoading; 
 
     const onSubmit = (values: FormValues) => {
         editMutation.mutate(values, {
@@ -60,10 +61,22 @@ export const EditAccountSheet = () => {
         }
     }; 
 
-    const defaultValues = accountQuery.data ? {
-        name: accountQuery.data.name
+    const defaultValues = transactionQuery.data ? {
+        accountId: transactionQuery.data.accountId, 
+        categoryId: transactionQuery.data.categoryId,
+        amount: transactionQuery.data.amount.toString(),
+        date: transactionQuery.data.date 
+            ? new Date(transactionQuery.data.accountId) 
+            : new Date(),
+        payee: transactionQuery.data.payee,
+        notes: transactionQuery.data.notes,
     } : {
-        name: "", 
+        accountId: "", 
+        categoryId: "", 
+        amount: "", 
+        date: "", 
+        payee: "", 
+        notes: "", 
     }; 
 
     return (
@@ -73,10 +86,10 @@ export const EditAccountSheet = () => {
                 <SheetContent className="space-y-4">
                     <SheetHeader>
                         <SheetTitle>
-                            Edit Account
+                            Edit Transaction
                         </SheetTitle>
                         <SheetDescription>
-                            Edit an existing account  
+                            Edit an existing transaction  
                         </SheetDescription>
                     </SheetHeader>
                     {isLoading
@@ -85,7 +98,8 @@ export const EditAccountSheet = () => {
                                 <Loader2 className="size-4 text-muted-foreground animate-spin" />
                             </div>
                         ) : (
-                            <AccountForm
+                            <TransactionForm
+                                key={id}
                                 id={id}
                                 onSubmit={onSubmit} 
                                 disabled={isPending} 
