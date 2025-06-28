@@ -7,6 +7,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { ImportTable } from "./import-table";
+import { convertAmountToMiliunits } from "@/lib/utils";
+import { format, parse } from "date-fns"; 
 
 const dateFormat = "yyyy-MM-dd HH:mm:ss"; 
 const outputFormat = "yyyy-MM-dd"; 
@@ -94,7 +96,13 @@ export const ImportCard = ({
             }, {}); 
         }); 
 
-        console.log({ arrayOfData }); 
+        const formattedData = arrayOfData.map((item) => ({
+            ...item,
+            amount: convertAmountToMiliunits(parseFloat(item.amount)), 
+            date: format(parse(item.date, dateFormat, new Date()), outputFormat)
+        })); 
+
+        console.log({ formattedData }); 
     }; 
 
     
