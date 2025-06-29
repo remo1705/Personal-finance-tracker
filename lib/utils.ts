@@ -23,6 +23,7 @@ export function formatCurrency(value: number) {
   }).format(value); 
 }; 
 
+
 export function calculatePercentageChange(
   current: number, 
   previous: number, 
@@ -32,7 +33,7 @@ export function calculatePercentageChange(
   }
 
   return ((current - previous) / previous) * 100; 
-}
+} 
 
 export function fillMissingDays (
   activeDays: {
