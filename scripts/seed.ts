@@ -6,7 +6,7 @@ import { categories, accounts, transactions } from "@/db/schema";
 import { convertAmountToMiliunits } from "@/lib/utils";
 
 
-config({ path: ".env.loval"}); 
+config({ path: ".env.local"}); 
 
 const sql = neon(process.env.DATABASE_URL!); 
 const db = drizzle(sql); 
