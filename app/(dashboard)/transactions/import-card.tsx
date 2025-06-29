@@ -88,7 +88,7 @@ export const ImportCard = ({
         const arrayOfData = mappedData.body.map((row) => {
             return row.reduce((acc: any, cell, index) => {
                 const header = mappedData.headers[index]; 
-                if (header != null) {
+                if (header !== null) {
                     acc[header] = cell;
                 }
 
@@ -102,7 +102,7 @@ export const ImportCard = ({
             date: format(parse(item.date, dateFormat, new Date()), outputFormat)
         })); 
 
-        console.log({ formattedData }); 
+        onSubmit(formattedData);  
     }; 
 
     

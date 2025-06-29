@@ -152,7 +152,7 @@ const app = new Hono()
                 return c.json({ error: "Unauthorized" }, 401); 
             }
 
-            const date = await db
+            const data = await db
             .insert(transactions)
             .values(
                 values.map((value) => ({
@@ -162,7 +162,7 @@ const app = new Hono()
             )
             .returning(); 
 
-            return c.json({ date });
+            return c.json({ data });
         }, 
     )
     .post (
