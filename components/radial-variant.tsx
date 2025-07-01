@@ -18,7 +18,7 @@ type Props = {
     }[]; 
 }; 
 
-export const PieVariant = ({ data }: Props) => {
+export const PieVariant = ({ data}: Props) => {
     const totalValue = data.reduce((sum, item) => sum + item.value, 0);
     return (
         <ResponsiveContainer width="100%" height={350}>
