@@ -7,7 +7,7 @@ import {
     DropdownMenuItem, 
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
-import { Delete, Edit, MoreHorizontal, Trash } from "lucide-react";
+import { Edit, MoreHorizontal, Trash } from "lucide-react";
 
 import { useOpenCategory } from "@/features/categories/hooks/use-open-category";
 import { useDeleteCategory } from "@/features/categories/api/use-delete-category";

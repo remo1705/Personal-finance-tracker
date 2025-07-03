@@ -7,7 +7,7 @@ import {
     DropdownMenuItem, 
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
-import { Delete, Edit, MoreHorizontal, Trash } from "lucide-react";
+import { Edit, MoreHorizontal, Trash } from "lucide-react";
 
 import { useOpenTransaction } from "@/features/transactions/hooks/use-open-transaction";
 import { useDeleteTransaction } from "@/features/transactions/api/use-delete-transaction";

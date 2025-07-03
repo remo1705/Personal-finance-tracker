@@ -7,7 +7,7 @@ import {
     DropdownMenuItem, 
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
-import { Delete, Edit, MoreHorizontal, Trash } from "lucide-react";
+import { Edit, MoreHorizontal, Trash } from "lucide-react";
 
 import { useOpenAccount } from "@/features/accounts/hooks/use-open-account";
 import { useDeleteAccount } from "@/features/accounts/api/use-delete-account";

@@ -2,10 +2,10 @@ import {useQuery} from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 
 import {client} from "@/lib/hono"; 
-import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import { convertAmountFromMiliunits } from "@/lib/utils";
 
 export const useGetTransactions = () => {
+
     const params = useSearchParams(); 
     const from = params.get("from") || ""; 
     const to = params.get("to") || ""; 
