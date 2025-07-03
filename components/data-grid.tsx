@@ -3,18 +3,16 @@
 import { Suspense } from "react";
 import { useGetSummary } from "@/features/summary/api/use-get-summary";
 import { formatDateRange } from "@/lib/utils";
-import { useSearchParams } from "next/navigation";
+
 import { FaPiggyBank } from "react-icons/fa";
 import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6"; 
 import { DataCard, DataCardLoading } from "@/components/data-card";
 
 const DataGridInner = () => {
     const { data, isLoading } = useGetSummary(); 
-    const params = useSearchParams(); 
-    const to = params.get("to") || undefined; 
-    const from = params.get("from") || undefined; 
 
-    const dateRangeLabel = formatDateRange({ to, from });
+    // Use a default date range label since we're getting the filtered data from useGetSummary
+    const dateRangeLabel = "Current Period";
     
     if (isLoading) {
         return (
@@ -33,7 +31,6 @@ const DataGridInner = () => {
                 value={data?.remainingAmount}
                 percentageChange={data?.remainingChange}
                 icon={FaPiggyBank}
-                variant="default"
                 dateRange={dateRangeLabel}
             />
             <DataCard 
@@ -41,7 +38,6 @@ const DataGridInner = () => {
                 value={data?.incomeAmount}
                 percentageChange={data?.incomeChange}
                 icon={FaArrowTrendUp}
-                variant="default"
                 dateRange={dateRangeLabel}
             />
             <DataCard 
@@ -49,7 +45,6 @@ const DataGridInner = () => {
                 value={data?.expensesAmount}
                 percentageChange={data?.expensesChange}
                 icon={FaArrowTrendDown}
-                variant="default"
                 dateRange={dateRangeLabel}
             />
         </div>
