@@ -2,6 +2,18 @@
 
 A modern, full-stack personal finance management application built with Next.js 15, designed to help users track their income, expenses, and financial goals with beautiful visualizations and comprehensive analytics.
 
+## 📋 About
+
+This Personal Finance Tracker is a comprehensive solution for individuals looking to take control of their financial life. The application allows users to:
+
+- **Track Multiple Accounts**: Manage checking, savings, credit cards, and investment accounts in one place
+- **Categorize Transactions**: Organize income and expenses with custom categories for better insights
+- **Visualize Financial Data**: Interactive charts and graphs provide clear spending patterns and trends
+- **Import & Export Data**: Bulk upload transactions via CSV files for easy data migration
+- **Secure & Private**: Each user's financial data is completely isolated and protected with modern authentication
+
+Built with modern web technologies, this application provides a seamless experience across all devices while maintaining bank-level security standards. Whether you're budgeting, tracking expenses, or planning for the future, this tool helps you make informed financial decisions.
+
 ## 🌐 Live Demo
 
 🚀 **[View Live Application](https://personal-finance-tracker-gilt.vercel.app/)**
