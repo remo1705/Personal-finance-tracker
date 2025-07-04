@@ -2,6 +2,12 @@
 
 A modern, full-stack personal finance management application built with Next.js 15, designed to help users track their income, expenses, and financial goals with beautiful visualizations and comprehensive analytics.
 
+## 🌐 Live Demo
+
+🚀 **[View Live Application](https://personal-finance-tracker-gilt.vercel.app/)**
+
+Experience the full functionality of the Personal Finance Tracker in the live deployment hosted on Vercel.
+
 ## ✨ Features
 
 ### 📊 Dashboard & Analytics
@@ -191,6 +197,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Acknowledgments
 
 - [Next.js](https://nextjs.org/) for the amazing React framework
+- [Vercel](https://vercel.com/) for seamless deployment and hosting
 - [Clerk](https://clerk.com/) for authentication services
 - [Neon](https://neon.tech/) for serverless PostgreSQL
 - [Radix UI](https://www.radix-ui.com/) for accessible components
